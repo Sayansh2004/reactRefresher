@@ -1,8 +1,13 @@
 import { useEffect,useState } from "react";
 import Card from "../shimmer/Card.jsx";
+import { useParams } from "react-router-dom";
 
 export default function RestaurantMenu(){
      const[resInfo,setResInfo]=useState(null);
+     const params=useParams();
+
+     const{resId}=params;
+     console.log(resId);
 
 
     useEffect(()=>{
@@ -10,8 +15,9 @@ export default function RestaurantMenu(){
     },[])
 
     const fetchMenu=async()=>{
-        const data=await fetch("https://corsproxy.io?https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.61&lng=77.20&page_type=DESKTOP_WEB_LISTING&offset=20");
-
+      const data = await fetch(
+        "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9716&lng=77.5946&restaurantId=" + resId
+    );
         const json=await data.json();
         console.log(json);
 
@@ -23,6 +29,7 @@ export default function RestaurantMenu(){
   }
  
     const {name,cloudinaryImageId,avgRating,cuisines}=resInfo?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]?.info;
+    
 
     
     
