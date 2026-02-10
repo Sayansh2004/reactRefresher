@@ -1,28 +1,20 @@
-import { useEffect,useState } from "react";
+
 import Card from "../shimmer/Card.jsx";
 import { useParams } from "react-router-dom";
-
+import useRestaurantMenu from "../utils/useRestaurantMenu.js";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 export default function RestaurantMenu(){
-     const[resInfo,setResInfo]=useState(null);
+    
+  const onlineStatus=useOnlineStatus();
+  if(!onlineStatus){
+    return <h1>Looks you are offline, check your internet connection</h1>
+  }
      const params=useParams();
 
      const{resId}=params;
      console.log(resId);
+ const resInfo=useRestaurantMenu(resId);
 
-
-    useEffect(()=>{
-        fetchMenu();
-    },[])
-
-    const fetchMenu=async()=>{
-      const data = await fetch(
-        "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9716&lng=77.5946&restaurantId=" + resId
-    );
-        const json=await data.json();
-        console.log(json);
-
-        setResInfo(json);
-    }
 
     if (resInfo === null) {
     return <Card />;

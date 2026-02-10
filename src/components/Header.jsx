@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 export default function Header() {
+    const userIsOnline=useOnlineStatus();
   return (
     <div className='flex justify-between bg-white shadow-md'>
         <div className="px-6 py-3">
@@ -7,6 +9,7 @@ export default function Header() {
         </div>
         <div>
             <ul className='flex gap-4 px-6 py-3'>
+                <li>{userIsOnline ? "✅ ": "❌"}</li>
                 <li className="hover:text-blue-600 cursor-pointer font-medium"><Link to="/">Home</Link></li>
                 <li className="hover:text-blue-600 cursor-pointer font-medium"><Link to="/about">About Us</Link></li>
                 <li className="hover:text-blue-600 cursor-pointer font-medium"><Link to="/contact">Contact Us</Link></li>
