@@ -9,7 +9,7 @@ export default function Header() {
         </div>
         <div>
             <ul className='flex gap-4 px-6 py-3'>
-                <li>{userIsOnline ? "✅ ": "❌"}</li>
+                <li>{userIsOnline ? "online status : ✅ ": "❌"}</li>
                 <li className="hover:text-blue-600 cursor-pointer font-medium"><Link to="/">Home</Link></li>
                 <li className="hover:text-blue-600 cursor-pointer font-medium"><Link to="/about">About Us</Link></li>
                 <li className="hover:text-blue-600 cursor-pointer font-medium"><Link to="/contact">Contact Us</Link></li>
